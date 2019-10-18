@@ -51,7 +51,10 @@ module.exports = function standardVersion (argv) {
       newVersion = version
     })
     .then(() => {
-      return bump(args, newVersion)
+      if(!args.fromScratch) {
+        return bump(args, newVersion)
+      }
+      return Promise.resolve()
     })
     .then((_newVersion) => {
       // if bump runs, it calculaes the new version that we
@@ -60,10 +63,16 @@ module.exports = function standardVersion (argv) {
       return changelog(args, newVersion)
     })
     .then(() => {
-      return commit(args, newVersion)
+      if(!args.fromScratch) {
+        return commit(args, newVersion)
+      }
+      return Promise.resolve()
     })
     .then(() => {
-      return tag(newVersion, pkg ? pkg.private : false, args)
+      if(!args.fromScratch) {
+        return tag(newVersion, pkg ? pkg.private : false, args)
+      }
+      return Promise.resolve()
     })
     .catch((err) => {
       printError(args, err.message)

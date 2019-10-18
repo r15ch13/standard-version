@@ -12,6 +12,7 @@ const defaults = {
   skip: {},
   dryRun: false,
   gitTagFallback: true,
+  fromScratch: false,
   preset: 'conventionalcommits'
 }
 

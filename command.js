@@ -79,6 +79,11 @@ const yargs = require('yargs')
     default: defaults.gitTagFallback,
     describe: 'fallback to git tags for version, if no meta-information file is found (e.g., package.json)'
   })
+  .option('from-scratch', {
+    type: 'boolean',
+    default: defaults.fromScratch,
+    describe: 'Creates a new changelog from scratch'
+  })
   .option('path', {
     type: 'string',
     describe: 'Only populate commits made under this path'
